@@ -7,16 +7,14 @@
     </head>
     <body>
         <h1>Rango says...</h1>
-        <h2>here is the about page</h2>
+        <h2>here is the about page.</h2>
         <div>
             This tutorial has been put together by <strong>{{yourname}}</strong><br />
         </div>
         <div>
-            <a href='/rango/'>Index</a><br />
-            <img src="{% static 'images/rango.jpg' %}"
-                 alt="picture of Rango" />
-            <img src="{{ MEDIA_URL }}cat.jpg"
-                 alt="Picture of a cat" />
+            <a href="/rango/">Index</a><br />
+            <img src="{% static 'images/rango.jpg' %}" alt="picture of Rango" />
+            <img src="{{ MEDIA_URL }}cat.jpg" alt="Picture of a Cat." />
         </div>
 
     </body>

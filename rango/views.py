@@ -12,5 +12,5 @@ def index(request):
     return render(request, 'rango/index.html', context=context_dict)
 
 def about(request):
-    context_dict2 = {'yourname': 'Muhammad Rafli Amrullah'}
-    return render(request, 'rango/about.html', context=context_dict2)
+    context_dict = {'yourname': 'Muhammad Rafli Amrullah'}
+    return render(request, 'rango/about.html', context=context_dict)
