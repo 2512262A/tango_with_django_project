@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="44694c4c-d6a3-4eb9-95ac-24c8987179f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/populate_rango.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rango/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/populate_rango.py" beforeDir="false" afterPath="$PROJECT_DIR$/populate_rango.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rango/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/rango/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rango/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/rango/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rango/recursive fib.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
