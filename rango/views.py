@@ -2,7 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rango.models import Category
 from rango.models import Page
-
+from rango.forms import CategoryForm
+from rango.forms import PageForm
+from django.shortcuts import redirect
+from django.urls import reverse
 
 
 def index(request):
@@ -39,7 +42,49 @@ def show_category(request, category_name_slug):
     # render the response and return it to the client.
     return render(request, 'rango/category.html', context=context_dict)
 
+def add_category(request):
+    form = CategoryForm()
 
+    # POST method to submit data from client to be processed
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
 
+        # checking if the form is valid
+        if form.is_valid():
+            # save new category to database
+            form.save(commit=True)
+            # return the user to main page
+            return redirect('/rango/')
+        else:
+            print(form.errors)
 
+    return render(request, 'rango/add_category.html', {'form': form})
 
+def add_page(request, category_name_slug):
+    # checking if the added category is already exist
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+    except Category.DoesNotExist:
+        category = None
+
+    # return to main page if the page added is from the category that does not exist
+    if category is None:
+        return redirect('/rango/')
+
+    form = PageForm()
+
+    if request.method == 'POST':
+        form = PageForm(request.POST)
+
+        if form.is_valid():
+            if category:
+                page = form.save(commit=False)
+                page.category = category
+                page.views = 0
+                page.save()
+            return redirect(reverse('rango:show_category',
+                                    kwargs={'category_name_slug': category_name_slug}))
+        else:
+            print(form.errors)
+    context_dict = {'form': form, 'category': category}
+    return render(request, 'rango/add_page.html', context=context_dict)
