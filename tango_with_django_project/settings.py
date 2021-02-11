@@ -104,6 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+# Password hashing
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
@@ -141,5 +142,4 @@ MEDIA_URL = '/media/'
 
 # Login address
 LOGIN_URL = 'rango:login'
-
 

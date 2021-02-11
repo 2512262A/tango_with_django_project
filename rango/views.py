@@ -11,6 +11,9 @@ from rango.forms import CategoryForm
 from rango.forms import PageForm
 from rango.forms import UserForm, UserProfileForm
 
+from datetime import datetime
+
+
 
 def index(request):
 
@@ -22,10 +25,15 @@ def index(request):
     context_dict['categories'] = category_list
     context_dict['pages'] = page_list
 
-    return render(request, 'rango/index.html', context=context_dict)
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+
+    response = render(request, 'rango/index.html', context=context_dict)
+    return response
 
 def about(request):
     context_dict = {'yourname': 'Muhammad Rafli Amrullah'}
+
     return render(request, 'rango/about.html', context=context_dict)
 
 def show_category(request, category_name_slug):
@@ -148,9 +156,31 @@ def user_login(request):
 
 @login_required
 def restricted(request):
-    return HttpResponse("")
+    return HttpResponse("since you're logged in, you can see this text")
 
 @login_required
 def user_logout(request):
     logout(request)
     return redirect(reverse('rango:index'))
+
+# HELPER FUNCTION
+
+def get_server_side_cookie(request, cookie, default_val=None):
+    val = request.session.get(cookie)
+    if not val:
+        val = default_val
+    return val
+
+def visitor_cookie_handler(request):
+    visits = int(request.COOKIES.get('visit', '1'))
+
+    last_visit_cookie = request.COOKIES.get('last_visit', str(datetime.now()))
+    last_visit_time = datetime.strptime(last_visit_cookie[:7], '%Y-%m-%d %H:%M:%S')
+
+    if (datetime.now() - last_visit_time).days > 0:
+        visits = visits + 1
+        response.session['last_visit'] = str(datetime.now())
+    else:
+        response.session['last_visit'] = last_visit_cookie
+
+    response.session['visits'] = visits
